@@ -9,7 +9,7 @@ var getProductsData = new XMLHttpRequest();
 
 getProductsData.onreadystatechange = function() {
 
-    //checando a resposta do servidor
+    //checking for when response is received from server
     if (getProductsData.readyState === 4) {
 
         //limitar o tamanho do nome do produto
@@ -60,7 +60,7 @@ getProductsData.onreadystatechange = function() {
             visitedproductInfoHtml = '<p class="product-pay-conditions">' + newProductInfo + '</p>';
         var visitedButton = '<a href="' + document.location.origin + '/itelios-challenge/' + visitedProductId + '" class="product-link"><span>adicionar ao carrinho</span><i class="material-icons">add_shopping_cart</i></a>';
 
-        visitedProductHtml = '<a class="product-anchor" href="#">' + visitedImage + visitedName + visitedPrice + visitedproductInfoHtml + visitedButton + '</a>';
+        visitedProductHtml = '<div>' + visitedImage + visitedName + visitedPrice + visitedproductInfoHtml + visitedButton + '</div>';
 
         //inserir produtos na área de produtos visitados
         document.getElementById("visited").innerHTML = visitedProductHtml;
@@ -105,20 +105,21 @@ getProductsData.onreadystatechange = function() {
             autoplay: true,
             controls: false,
             autoplayButtonOutput: false,
-            speed: 700,
+            speed: 1200,
             autoplayHoverPause: true,
+			slideBy: 'page',
             responsive: {
-                980: {
-                    items: 3
-                },
-                760: {
-                    items: 2
-                },
-                480: {
-                    items: 1
-                }
-            },
-            slideBy: 'page'
+             980: {
+					items: 3
+				},
+             760: {
+					items: 2
+				},
+				480: {
+					items: 1
+				}
+            }
+            
 
         });
     }
@@ -126,3 +127,10 @@ getProductsData.onreadystatechange = function() {
 
 getProductsData.open("GET", "products.json", true);
 getProductsData.send();
+
+$( document ).ready(function() {
+   //After EVERYTHING loads, including images.
+
+$('.tns-nav').wrapAll('<div class="tns-nav-wrapper"></div>');
+	
+});
