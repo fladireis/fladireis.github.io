@@ -94,7 +94,7 @@ getProductsData.onreadystatechange = function() {
                 recommendedInfoHtml = '<p class="product-pay-conditions">' + newProductInfo + '</p>';
             var recommendedButton = '<a href="' + document.location.origin + '/itelios-challenge/' + recommendedProductId + '" class="product-link"><span>adicionar ao carrinho</span><i class="material-icons">add_shopping_cart</i></a>';
 
-            recomendationsProductHtml += '<div class="product-item"><a class="product-anchor" href="#">' + recommendedImage + recommendedName + recommendedPrice + recommendedInfoHtml + recommendedButton + '</a></div>';
+            recomendationsProductHtml += '<div class="product-item">' + recommendedImage + recommendedName + recommendedPrice + recommendedInfoHtml + recommendedButton + '</div>';
         }
         //inserir produtos na área de produtos recomendados
         document.getElementById("recommended").innerHTML = recomendationsProductHtml;
