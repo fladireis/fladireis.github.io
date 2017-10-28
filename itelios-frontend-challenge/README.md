@@ -8,4 +8,6 @@ Olá, meu Nome é Flávio Diego dos Reis (Fladir), e este é o resultado do meu 
 
 Acesse o link https://fladireis.github.io/itelios-frontend-challenge/
 
-Em breve mais detalhes.
+## Detalhes do Projeto
+
+A maior parte código que processa o aquivo .json foi desenvolvido com javascript puro.

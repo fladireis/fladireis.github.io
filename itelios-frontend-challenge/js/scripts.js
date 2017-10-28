@@ -12,7 +12,7 @@ getProductsData.onreadystatechange = function() {
     //checking for when response is received from server
     if (getProductsData.readyState === 4) {
 
-        //limitar o tamanho do nome do produto
+        //trim name of product
         function truncate(string, limit) {
             if (string.length > limit) {
                 limit--;
@@ -33,7 +33,7 @@ getProductsData.onreadystatechange = function() {
             return string;
         }
 
-        //obter dados dos produtos visitados
+        //get data of visited product
         var productInfo = JSON.parse(getProductsData.responseText)[0];
         var visitedProduct = productInfo.data.item,
             visitedProductId = visitedProduct.businessId,
@@ -43,7 +43,7 @@ getProductsData.onreadystatechange = function() {
             visitedProductOldPrice = visitedProduct.oldPrice,
             visitedProductInfo = visitedProduct.productInfo.paymentConditions;
 
-        //criar tags das informações dos produtos visitados
+        //create tags of visited product informations
         var visitedImage = '<img src="' + visitedProductImage + '" />';
         var visitedName = '<p class="product-name">' + truncate(visitedProductName, 80) + '</p>';
 
@@ -62,11 +62,11 @@ getProductsData.onreadystatechange = function() {
 
         visitedProductHtml = '<div>' + visitedImage + visitedName + visitedPrice + visitedproductInfoHtml + visitedButton + '</div>';
 
-        //inserir produtos na área de produtos visitados
+        //insert product in visited area
         document.getElementById("visited").innerHTML = visitedProductHtml;
 
 
-        //obter dados dos produtos recomendados
+        //get data of recommended products
         var recommendations = productInfo.data.recommendation;
         var recomendationsProductHtml = '';
         for (var i = 0; i < recommendations.length; i++) {
@@ -77,7 +77,7 @@ getProductsData.onreadystatechange = function() {
                 recommendedProductOldPrice = recommendations[i].oldPrice,
                 recommendedProductInfo = recommendations[i].productInfo.paymentConditions;
 
-            //criar tags das informações dos produtos recomendados
+        //create tags of recommended product informations
             var recommendedImage = '<img src="' + recommendedProductImage + '" />';
             var recommendedName = '<p class="product-name">' + truncate(recommendedProductName, 80) + '</p>';
 
@@ -96,10 +96,10 @@ getProductsData.onreadystatechange = function() {
 
             recomendationsProductHtml += '<div class="product-item">' + recommendedImage + recommendedName + recommendedPrice + recommendedInfoHtml + recommendedButton + '</div>';
         }
-        //inserir produtos na área de produtos recomendados
+        //insert products in recommended carousel
         document.getElementById("recommended").innerHTML = recomendationsProductHtml;
 
-        //configurações do carrossel
+        //Tiny Slider settings
         var slider = tns({
             container: '.recommended-carousel',
             autoplay: true,
@@ -122,15 +122,21 @@ getProductsData.onreadystatechange = function() {
             
 
         });
+
+		//wrap carousel nav pagination
+		var el = document.querySelector('.tns-nav');
+		var wrapper = document.createElement('div');
+		wrapper.className = "tns-nav-wrapper";
+		el.parentNode.insertBefore(wrapper, el);
+		wrapper.appendChild(el);
     }
 };
 
 getProductsData.open("GET", "products.json", true);
 getProductsData.send();
 
-$( document ).ready(function() {
-   //After EVERYTHING loads, including images.
+//wrap carousel nav pagination //Jquery
+//$( document ).ready(function() {
+//$('.tns-nav').wrapAll('<div class="tns-nav-wrapper"></div>');
+//});
 
-$('.tns-nav').wrapAll('<div class="tns-nav-wrapper"></div>');
-	
-});
